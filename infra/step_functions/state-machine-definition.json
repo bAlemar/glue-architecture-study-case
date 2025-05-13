@@ -1,0 +1,47 @@
+{
+	"Comment": "Pipeline RAW to SILVER to GOLD",
+	"StartAt": "RunRawGlueJob",
+	"States": {
+		"RunRawGlueJob": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::glue:startJobRun.sync",
+			"Parameters": {
+				"JobName": "glue-architecture-terraform-raw",
+				"Arguments": {
+					"--ingest_id.$": "$.ingest_id",
+					"--bucket.$": "$.bucket",
+					"--object_key.$": "$.object_key"
+				}
+			},
+			"ResultPath": "$.RawJobResult",
+			"Next": "RunSilverGlueJob"
+		},
+		"RunSilverGlueJob": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::glue:startJobRun.sync",
+			"Parameters": {
+				"JobName": "glue-architecture-terraform-silver",
+				"Arguments": {
+					"--ingest_id.$": "$.ingest_id",
+					"--bucket.$": "$.bucket",
+					"--object_key.$": "$.object_key"
+				}
+			},
+			"ResultPath": "$.SilverJobResult",
+			"Next": "RunGoldGlueJob"
+		},
+		"RunGoldGlueJob": {
+			"Type": "Task",
+			"Resource": "arn:aws:states:::glue:startJobRun.sync",
+			"Parameters": {
+				"JobName": "glue-architecture-terraform-gold",
+				"Arguments": {
+					"--ingest_id.$": "$.ingest_id",
+					"--bucket.$": "$.bucket",
+					"--object_key.$": "$.object_key"
+				}
+			},
+			"End": true
+		}
+	}
+}
