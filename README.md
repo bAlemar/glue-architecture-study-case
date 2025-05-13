@@ -40,7 +40,7 @@ example:
 
 ## TODO:
 
+-> Formato padrão Readme.
+-> Configuração de conta AWS básico.
 -> Criar Bucket do tfstate com bash ou Ansible também. Habilitar Versionamento no bucket.
--> Passo a passo do 0(?)
-
 

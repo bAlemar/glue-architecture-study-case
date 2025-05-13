@@ -4,7 +4,7 @@ module "raw" {
     stage = "raw"
     glue_src_path = path.module
     pythonfile = "raw.py"
-    bucket_name = "glue-architecture-project" #Não está criado
+    bucket_name = "glue-architecture-project"
     role_arn = aws_iam_role.glue_service_role.arn
     glue_job_type = "5.0"
     timeout = 60
@@ -22,7 +22,7 @@ module "silver"{
     stage = "silver"
     glue_src_path = path.module
     pythonfile = "silver.py"
-    bucket_name = "glue-architecture-project" #Não está criado
+    bucket_name = "glue-architecture-project"
     role_arn = aws_iam_role.glue_service_role.arn
     glue_job_type = "5.0"
     timeout = 60
@@ -40,7 +40,7 @@ module "gold"{
     stage = "gold"
     glue_src_path = path.module
     pythonfile = "gold.py"
-    bucket_name = "glue-architecture-project" #Não está criado
+    bucket_name = "glue-architecture-project"
     role_arn = aws_iam_role.glue_service_role.arn
     glue_job_type = "5.0"
     timeout = 60
